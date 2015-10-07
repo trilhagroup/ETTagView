@@ -9,6 +9,12 @@ Clone this repo and copy the folder **ETTagView** into your Xcode project.
 How-to
 --------
 
+### Video
+
+![image](demo.gif)
+
+### Screenshots
+
 ![image](demo.png)
 
 ### Initialization
