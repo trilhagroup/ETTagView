@@ -1,6 +1,6 @@
 ETTagView
 ========
-A wrapper flexible for multiple tags. **ETTagView** creates buttons inside a view with different colors, texts and interactions. Just provide an array of dictionaries and this view will be able to display everything automatically.
+A wrapper flexible for multiple interactive colorful tags. **ETTagView** creates buttons inside a view with different colors, texts and interactions. Just provide an array of dictionaries and this view will be able to display everything automatically.
 
 Installation
 --------
@@ -13,7 +13,7 @@ How-to
 
 ### Initialization
 
-Programmatically, you must create using a traditional view.
+Programmatically, you must create using a traditional view or from your project's IB file.
 
 ```
 - (CGRect)layoutTags:(NSArray *)tags colored:(BOOL)colored;
