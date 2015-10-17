@@ -62,7 +62,7 @@
 }
 
 - (CGRect)layoutTags:(NSArray *)tags colored:(BOOL)colored forMaximumSize:(NSInteger)maxSize canOverflow:(BOOL)overflow {
-    return [self layoutTags:tags matchingTags:tags colored:colored forMaximumSize:maxSize canOverflow:overflow];
+    return [self layoutTags:tags matchingTags:nil colored:colored forMaximumSize:maxSize canOverflow:overflow];
 }
 
 - (CGRect)layoutTags:(NSArray *)tags matchingTags:(NSArray *)matchingTags colored:(BOOL)colored forMaximumSize:(NSInteger)maxSize canOverflow:(BOOL)overflow {
@@ -86,19 +86,22 @@
         [button.titleLabel setFont:[UIFont boldSystemFontOfSize:11.0f]];
         [button.titleLabel setTextAlignment:NSTextAlignmentCenter];
         [button.titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
-        [button addTarget:self action:@selector(touchedButton:) forControlEvents:UIControlEventTouchUpInside];
+        if (matchingTags) [button addTarget:self action:@selector(touchedButton:) forControlEvents:UIControlEventTouchUpInside];
         [button setTag:i];
         
         // Background color
         [button.layer setBackgroundColor:[UIColor grayColor].CGColor];
-        if (matchingTags) {
-            for (int j = 0; j < [matchingTags count]; j++) {
-                if ([[[tags objectAtIndex:i] objectForKey:@"tagID"] isEqualToString:[[matchingTags objectAtIndex:j]objectForKey:@"tagID"]]) {
-                    if (colored) {
-                        [button.layer setBackgroundColor:[self colorAtIndex:i].CGColor];
-                    }
-                    break;
+        
+        if (!matchingTags) {
+            matchingTags = tags;
+        }
+            
+        for (int j = 0; j < [matchingTags count]; j++) {
+            if ([[[tags objectAtIndex:i] objectForKey:@"tagID"] isEqualToString:[[matchingTags objectAtIndex:j]objectForKey:@"tagID"]]) {
+                if (colored) {
+                    [button.layer setBackgroundColor:[self colorAtIndex:i].CGColor];
                 }
+                break;
             }
         }
         
