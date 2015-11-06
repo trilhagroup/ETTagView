@@ -76,6 +76,10 @@
 
     CGFloat currentX = 0.0f, currentY = 0.0f, padding = 12.0f, buttonHeight = 10.0f + padding;
     unsigned long numInteractions = MIN([tags count], maxSize);
+    BOOL touchable = (matchingTags) ? YES : NO;
+    
+    // Assign tags to be compared
+    if (!matchingTags) matchingTags = tags;
     
     for (int i = 0; i < numInteractions; i++) {
         
@@ -86,15 +90,11 @@
         [button.titleLabel setFont:[UIFont boldSystemFontOfSize:11.0f]];
         [button.titleLabel setTextAlignment:NSTextAlignmentCenter];
         [button.titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
-        if (matchingTags) [button addTarget:self action:@selector(touchedButton:) forControlEvents:UIControlEventTouchUpInside];
+        if (touchable) [button addTarget:self action:@selector(touchedButton:) forControlEvents:UIControlEventTouchUpInside];
         [button setTag:i];
         
         // Background color
         [button.layer setBackgroundColor:[UIColor grayColor].CGColor];
-        
-        if (!matchingTags) {
-            matchingTags = tags;
-        }
             
         for (int j = 0; j < [matchingTags count]; j++) {
             if ([[[tags objectAtIndex:i] objectForKey:@"tagID"] isEqualToString:[[matchingTags objectAtIndex:j]objectForKey:@"tagID"]]) {
